@@ -1,5 +1,7 @@
 <script setup>
 import axios from 'axios';
+
+import Segment from "./components/Segment.vue";
 </script>
 
 <script>
@@ -20,7 +22,6 @@ export default {
   mounted() {
     axios('https://datausa.io/api/data?drilldowns=Nation&measures=Population')
       .then((response) => {
-        console.log(response);
         response.data.data.forEach(el => {
           this.nation.data.push({
             year: el['ID Year'],
@@ -36,7 +37,6 @@ export default {
     axios('https://datausa.io/api/data?drilldowns=State&measures=Population&year=latest')
       .then((response) => {
         response.data.data.forEach(el => {
-          console.log(el);
           this.states.data.push({
             id: el['ID State'],
             state: el.State,
@@ -54,20 +54,19 @@ export default {
 </script>
 
 <template>
-  <h2>United States population throughout the years</h2>
-  <ul>
-    <li v-for="data in nation.data" :key="data.year">
-      {{ data.year }} - {{ new Intl.NumberFormat('en-US').format(data.population) }}
-    </li>
-  </ul>
-  <p>Source: {{ nation.source }}</p>
-  <h2>Population in every state in last year</h2>
-  <p>Note - the last recorded year with data available is <b>{{ states.latestYear }}</b>.</p>
-  <ul>
-    <li v-for="data in states.data" :key="data.id">
-      {{ data.state }} - {{ new Intl.NumberFormat('en-US').format(data.population) }}
-    </li>
-  </ul>
+  <Segment :dataObj="nation" per="year" id="year">
+    <template #header>
+      United States population throughout the years
+    </template>
+  </Segment>
+  <Segment :dataObj="states" per="state" id="id">
+    <template #header>
+      Population in every state in last year
+    </template>
+    <template #optionalNote>
+      Note - the last recorded year with data available is <b>{{ states.latestYear }}</b>.
+    </template>
+  </Segment>
 </template>
 
 <style scoped>
