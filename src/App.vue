@@ -8,6 +8,9 @@ import Home from "./views/Home.vue";
 
 <template>
   <Home />
+  <footer>
+    © Krzysztof Olejnik 2023
+  </footer>
 </template>
 
 <style scoped>

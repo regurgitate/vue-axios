@@ -1,5 +1,14 @@
 # vue-axios
 
+Simple showcase of axios usage and Vue.js framework concepts.
+
+The task description that was supposed to be completed:
+Create a simple Vue.js app, that shows list of elements gathered using API.
+API request should be done using Axios library. Showing the results should be achieved using Vue.js directives and components.
+
+Working example can be seen here: _
+
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
